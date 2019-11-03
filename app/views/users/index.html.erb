@@ -27,4 +27,5 @@
 <br>
 
 <%= link_to 'New User', new_user_path %>
-<%= link_to 'Download Pdf', users_pdfs_path %>
+<%= link_to 'Download A3 PDF', users_pdfs_path(page_size: "A4") %>
+<%= link_to 'Download A4 PDF', users_pdfs_path(page_size: "A3") %>
