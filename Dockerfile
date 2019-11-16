@@ -20,6 +20,7 @@ RUN apt-get update -qq \
     &&  apt-get install -y --no-install-recommends \
         build-essential \
         default-mysql-client \
+        fonts-hanazono \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir $APP_ROOT
