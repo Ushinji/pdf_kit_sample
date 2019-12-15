@@ -15,5 +15,6 @@ describe "GET /users/pdfs" do
     subject
     expect(response).to have_http_status(200)
     expect(response.headers["Content-Disposition"]).to include("filename=ユーザー一覧.pdf")
+    expect(response.body).to match_pdf_snapshot("user_list")
   end
 end
