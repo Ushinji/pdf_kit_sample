@@ -2,9 +2,15 @@
 
 require "rspec/expectations"
 
-RSpec::Matchers.define :match_pdf_snapshot do |expected_pdf_filename|
+RSpec::Matchers.define :match_pdf_snapshot do |expected|
   match do |actual|
-    save_pdf!(snapshot_path, actual)
+    actual_pdf = MiniMagick::Image.read(actual)
+    expected_pdf = MiniMagick::Image.open(snapshot_path)
+    diff(actual_pdf, expected_pdf)
+  end
+
+  def diff(actual_pdf, expected_pdf)
+    actual_pdf.pages[0].format("jpg").to_blob == expected_pdf.pages[0].format("jpg").to_blob
   end
 
   def save_pdf!(path, body)
