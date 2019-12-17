@@ -16,6 +16,7 @@ gem "turbolinks", "~> 5"
 gem "webpacker"
 gem "wkhtmltopdf-binary-edge", "~> 0.12.4.0"
 gem "mini_magick"
+gem "to_bool"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
