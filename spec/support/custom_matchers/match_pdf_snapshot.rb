@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "rspec/expectations"
-require 'fileutils'
+require "fileutils"
 
 RSpec::Matchers.define :match_pdf_snapshot do |expected|
   match do |actual|

@@ -7,16 +7,16 @@ ruby "2.6.3"
 
 gem "bootsnap", ">= 1.4.2", require: false
 gem "jbuilder", "~> 2.7"
+gem "mini_magick"
 gem "mysql2", ">= 0.4.4"
 gem "pdfkit"
 gem "puma", "~> 3.11"
 gem "rails", "~> 6.0.0"
 gem "sass-rails", "~> 5"
+gem "to_bool"
 gem "turbolinks", "~> 5"
 gem "webpacker"
 gem "wkhtmltopdf-binary-edge", "~> 0.12.4.0"
-gem "mini_magick"
-gem "to_bool"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
