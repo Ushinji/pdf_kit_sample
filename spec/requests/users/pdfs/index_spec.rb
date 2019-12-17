@@ -22,7 +22,7 @@ describe "GET /users/pdfs" do
 
   context "複数ページの場合" do
     before do
-      create_list(:user, 99)
+      create_list(:user, 100)
     end
 
     it "指定の内容のPDFが出力されること" do

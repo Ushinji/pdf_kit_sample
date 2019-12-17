@@ -6,12 +6,13 @@ require "fileutils"
 RSpec::Matchers.define :match_pdf_snapshot do |expected|
   match do |actual|
     return true if snapshot_not_exist? && generate_snapshot!
-    return true if is_update? && generate_snapshot!
 
     actual_pdf = MiniMagick::Image.read(actual)
     expected_pdf = MiniMagick::Image.open(snapshot_path)
     @diff_pages = diff_pages(actual_pdf, expected_pdf)
     return true if @diff_pages.empty?
+    
+    return true if is_update? && generate_snapshot!
     save_failure_actual_pdf!
     false
   end
