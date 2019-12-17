@@ -6,6 +6,8 @@ require 'fileutils'
 RSpec::Matchers.define :match_pdf_snapshot do |expected|
   match do |actual|
     return true if snapshot_not_exist? && generate_snapshot!
+    return true if is_update? && generate_snapshot!
+
     actual_pdf = MiniMagick::Image.read(actual)
     expected_pdf = MiniMagick::Image.open(snapshot_path)
     @diff_pages = diff_pages(actual_pdf, expected_pdf)
@@ -21,7 +23,7 @@ Snapshot failed.
 expected #{snapshot_path}
 actual #{failure_actual_path}
 
-Inspect your code changes.
+Inspect your code changes or run or `UPDARE_SNAPSHOT=true bundle exec rspec` to update them.
 EOS
   end
 
@@ -64,6 +66,10 @@ EOS
 
   def save_failure_actual_pdf!
     save_pdf!(failure_actual_path, actual)
+  end
+
+  def is_update?
+    ENV["UPDARE_SNAPSHOT"].to_bool
   end
 
   def report_message(message)
