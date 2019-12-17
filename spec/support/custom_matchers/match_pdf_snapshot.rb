@@ -19,6 +19,7 @@ RSpec::Matchers.define :match_pdf_snapshot do |expected|
   failure_message do |actual|
     <<-EOS
 Snapshot failed.
+Differnt pages: #{@diff_pages}
 
 expected #{snapshot_path}
 actual #{failure_actual_path}
@@ -28,11 +29,13 @@ Inspect your code changes or run `UPDARE_SNAPSHOT=true bundle exec rspec` to upd
   end
 
   def diff_pages(actual_pdf, expected_pdf)
-    actual_pdf.pages.select.with_index do |_, idx|
+    result = []
+    actual_pdf.pages.each.with_index do |_, idx|
       actual_blob = actual_pdf.pages[idx].format("jpg").to_blob
       expected_blob = expected_pdf.pages[idx].format("jpg").to_blob
-      actual_blob != expected_blob
-    end.map.with_index { |_, idx| idx + 1 }
+      result << idx + 1 if actual_blob != expected_blob
+    end
+    result
   end
 
   def save_pdf!(path, body)
