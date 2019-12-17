@@ -21,6 +21,9 @@ RUN apt-get update -qq \
         build-essential \
         default-mysql-client \
         fonts-hanazono \
+        ghostscript \
+        libgs-dev \
+        imagemagick \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir $APP_ROOT
