@@ -17,14 +17,14 @@ RSpec::Matchers.define :match_pdf_snapshot do |expected|
   end
 
   failure_message do |actual|
-    <<"EOS"
+    <<-EOS
 Snapshot failed.
 
 expected #{snapshot_path}
 actual #{failure_actual_path}
 
-Inspect your code changes or run or `UPDARE_SNAPSHOT=true bundle exec rspec` to update them.
-EOS
+Inspect your code changes or run `UPDARE_SNAPSHOT=true bundle exec rspec` to update them.
+    EOS
   end
 
   def diff_pages(actual_pdf, expected_pdf)
